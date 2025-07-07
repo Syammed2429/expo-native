@@ -13,6 +13,7 @@ import expo.modules.kotlin.AppContext
 import expo.modules.kotlin.records.Field
 import expo.modules.kotlin.records.Record
 import expo.modules.kotlin.views.ExpoView
+import expo.modules.kotlin.viewevent.EventDispatcher
 
 
 class Series : Record {
@@ -25,6 +26,9 @@ class Series : Record {
 
 class ExpoRadialChartView(context: Context, appContext: AppContext) : ExpoView(context, appContext) {
   private var seriesData: ArrayList<Series> = ArrayList()
+  
+  // Event dispatcher for segment selection
+  val onSegmentSelect by EventDispatcher()
   
   internal val chartView = PieChart(context).also {
     it.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -49,8 +53,8 @@ class ExpoRadialChartView(context: Context, appContext: AppContext) : ExpoView(c
             val index = highlight.x.toInt()
             if (index < seriesData.size) {
               val series = seriesData[index]
-              // Send event to React Native
-              sendEvent("onSegmentSelect", mapOf(
+              // Send event to React Native using EventDispatcher
+              onSegmentSelect(mapOf(
                 "index" to index,
                 "percentage" to series.percentage,
                 "color" to series.color

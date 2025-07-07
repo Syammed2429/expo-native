@@ -62,7 +62,6 @@ export default function Screen() {
     color: string;
   }) {
     setSelectedSegment(event.index);
-    console.log("Segment selected:", event);
   }
   return (
     <View className='flex-1 justify-center items-center gap-5 p-6 bg-secondary/30'>

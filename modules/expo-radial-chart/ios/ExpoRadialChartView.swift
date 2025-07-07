@@ -12,6 +12,9 @@ struct Series: Record {
 class ExpoRadialChartView: ExpoView {
   let chartView = PieChartView()
   private var seriesData: [Series] = []
+  
+  // Event dispatcher for segment selection
+  let onSegmentSelect = EventDispatcher()
 
   required init(appContext: AppContext? = nil) {
     super.init(appContext: appContext)
@@ -72,8 +75,8 @@ extension ExpoRadialChartView: ChartViewDelegate {
                            Int(green * 255), 
                            Int(blue * 255))
       
-      // Send event to React Native
-      sendEvent("onSegmentSelect", [
+      // Send event to React Native using EventDispatcher
+      onSegmentSelect([
         "index": index,
         "percentage": series.percentage,
         "color": hexColor
