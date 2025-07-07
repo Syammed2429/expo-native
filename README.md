@@ -1,6 +1,30 @@
 # Expo Native Module Development Guide
 
-A comprehensive guide for creating native modules using Expo Modules API. This example demonstrates wrapping third-party libraries (radial chart), but **these same steps work for ANY native code** - whether it's third-party libraries, custom native functionality, or platform-specific features.
+## 📱 Demo
+
+Here's the interactive radial chart running on iOS, built with our native module:
+
+<div align="center">
+  <img src="assets/screenshots/expo-native.png" alt="Native Radial Chart Demo on iOS" width="300">
+</div>
+
+_Interactive pie chart with segment selection, built using MPAndroidChart (Android) & DGCharts (iOS)_
+
+### ✨ What You See in the Demo
+
+- **Interactive Chart**: Tap any segment to select it
+- **Visual Feedback**: Selected segments show highlighted indicators in the legend
+- **Real-time Updates**: Tap the refresh button to generate new random data
+- **Cross-Platform**: Same functionality works on both iOS and Android
+- **Native Performance**: Smooth animations and touch handling via native libraries
+
+### 🎯 Demo Features Highlighted
+
+1. **Native Chart Rendering** - Using DGCharts on iOS
+2. **Touch Interaction** - Native gesture handling
+3. **Event Communication** - Native-to-React Native event emission
+4. **TypeScript Integration** - Type-safe props and event handling
+5. **Modern UI** - NativeWind styling with proper themingensive guide for creating native modules using Expo Modules API. This example demonstrates wrapping third-party libraries (radial chart), but **these same steps work for ANY native code** - whether it's third-party libraries, custom native functionality, or platform-specific features.
 
 ## 🎯 What You Can Build
 
@@ -38,7 +62,17 @@ This guide works for creating **any type of native module**:
 - **TypeScript Support**: Full type safety
 - **Modern Expo**: Works with Expo SDK 52+ and new architecture
 
-## 📋 Prerequisites
+## � Demo
+
+Here's the interactive radial chart running on iOS, built with our native module:
+
+<div align="center">
+  <img src="assets/screenshots/ios-radial-chart-demo.png" alt="Native Radial Chart Demo on iOS" width="300">
+</div>
+
+_Interactive pie chart with segment selection, built using MPAndroidChart (Android) & DGCharts (iOS)_
+
+## �📋 Prerequisites
 
 - Node.js 18+
 - Expo CLI (`npm install -g @expo/cli`)
