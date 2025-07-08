@@ -62,13 +62,7 @@ This guide works for creating **any type of native module**:
 - **TypeScript Support**: Full type safety
 - **Modern Expo**: Works with Expo SDK 52+ and new architecture
 
-## � Demo
 
-Here's the interactive radial chart running on iOS, built with our native module:
-
-<div align="center">
-  <img src="assets/screenshots/ios-radial-chart-demo.png" alt="Native Radial Chart Demo on iOS" width="300">
-</div>
 
 _Interactive pie chart with segment selection, built using MPAndroidChart (Android) & DGCharts (iOS)_
 
