@@ -2,10 +2,11 @@
 
 ## 📱 Demo
 
-Here's the interactive radial chart running on iOS, built with our native module:
+Here's the interactive radial chart running on both platforms, built with the native module:
 
 <div align="center">
-  <img src="assets/screenshots/expo-native.png" alt="Native Radial Chart Demo on iOS" width="300">
+  <img src="assets/screenshots/expo-native.png" alt="Native Radial Chart Demo on IOS" width="300">
+  <img src="assets/screenshots/expo-native-android.png" alt="Native Radial Chart Demo on Android" width="300">
 </div>
 
 _Interactive pie chart with segment selection, built using MPAndroidChart (Android) & DGCharts (iOS)_
@@ -20,11 +21,30 @@ _Interactive pie chart with segment selection, built using MPAndroidChart (Andro
 
 ### 🎯 Demo Features Highlighted
 
-1. **Native Chart Rendering** - Using DGCharts on iOS
+1. **Native Chart Rendering** - Using MPAndroidChart on Android, DGCharts on iOS
 2. **Touch Interaction** - Native gesture handling
 3. **Event Communication** - Native-to-React Native event emission
 4. **TypeScript Integration** - Type-safe props and event handling
-5. **Modern UI** - NativeWind styling with proper themingensive guide for creating native modules using Expo Modules API. This example demonstrates wrapping third-party libraries (radial chart), but **these same steps work for ANY native code** - whether it's third-party libraries, custom native functionality, or platform-specific features.
+5. **Modern UI** - NativeWind styling with proper theming
+
+## 📸 Screenshots
+
+The demo shows the same radial chart running on both platforms with identical functionality:
+
+**Android (left)** - Using MPAndroidChart library
+**iOS (right)** - Using DGCharts library
+
+Both implementations show three data segments:
+
+- **Research** (35%) - Red segment
+- **Inventions** (25%) - Teal segment
+- **Adventures** (40%) - Blue segment
+
+Each segment is interactive and provides visual feedback when selected. The chart uses native charting libraries for optimal performance and smooth animations on both platforms.
+
+## 📖 About This Guide
+
+This is a comprehensive guide for creating native modules using Expo Modules API. This example demonstrates wrapping third-party libraries (radial chart), but **these same steps work for ANY native code** - whether it's third-party libraries, custom native functionality, or platform-specific features.
 
 ## 🎯 What You Can Build
 
@@ -32,7 +52,7 @@ This guide works for creating **any type of native module**:
 
 ### 📦 Third-Party Library Wrappers
 
-- Chart libraries (like our example)
+- Chart libraries (like an example)
 - Camera/Video libraries
 - Authentication SDKs
 - Analytics SDKs
@@ -62,18 +82,97 @@ This guide works for creating **any type of native module**:
 - **TypeScript Support**: Full type safety
 - **Modern Expo**: Works with Expo SDK 52+ and new architecture
 
+## 📋 Prerequisites
 
-
-_Interactive pie chart with segment selection, built using MPAndroidChart (Android) & DGCharts (iOS)_
-
-## �📋 Prerequisites
+### Basic Requirements
 
 - Node.js 18+
 - Expo CLI (`npm install -g @expo/cli`)
-- iOS: Xcode 14+ and CocoaPods
-- Android: Android Studio with SDK 31+
 
-## 🛠️ Universal Implementation Guide
+### iOS Development
+
+- macOS with Xcode 14+
+- CocoaPods (`sudo gem install cocoapods`)
+
+### Android Development
+
+- Android Studio with SDK 31+
+- **Java Development Kit (JDK) 17** - Required for React Native development
+
+#### ⚠️ Important: Java SDK Setup for Android
+
+**Common Issue**: `No Java compiler found, please ensure you are running Gradle with a JDK`
+
+**Solution for macOS (recommended)**:
+
+```bash
+# Install OpenJDK 17 using Homebrew
+brew install openjdk@17
+
+# Set up environment variables (add to ~/.zshrc or ~/.bash_profile)
+echo 'export JAVA_HOME="/opt/homebrew/opt/openjdk@17"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"' >> ~/.zshrc
+
+# Apply changes
+source ~/.zshrc
+
+# Verify installation
+java -version  # Should show OpenJDK 17
+echo $JAVA_HOME  # Should show the Java path
+```
+
+**Alternative installation methods**:
+
+```bash
+# Using SDKMAN (cross-platform)
+curl -s "https://get.sdkman.io" | bash
+sdk install java 17.0.15-tem
+
+# Manual download from Oracle/OpenJDK
+# Download JDK 17 from: https://adoptium.net/temurin/releases/
+```
+
+**Windows users**:
+
+1. Download OpenJDK 17 from [Adoptium](https://adoptium.net/temurin/releases/)
+2. Set `JAVA_HOME` environment variable to JDK installation path
+3. Add `%JAVA_HOME%\bin` to your PATH
+
+**Verify your setup**:
+
+```bash
+java -version  # Should show version 17.x.x
+javac -version # Should show version 17.x.x
+echo $JAVA_HOME # Should show path to JDK installation
+```
+
+## � Quick Start
+
+To run this demo project:
+
+```bash
+# 1. Clone and install dependencies
+git clone <your-repo-url>
+cd expo-native
+npm install
+
+# 2. Set up Java for Android (if not already done)
+brew install openjdk@17
+echo 'export JAVA_HOME="/opt/homebrew/opt/openjdk@17"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# 3. Generate native code
+npx expo prebuild
+
+# 4. Run on Android
+npx expo run:android
+
+# 5. Run on iOS (macOS only)
+npx expo run:ios
+```
+
+## �🛠️ Universal Implementation Guide
 
 ### Step 1: Create Expo Project (if starting fresh)
 
@@ -762,7 +861,96 @@ Only publish to NPM if you want to:
 
 **For single-app use, local modules are the recommended approach.**
 
-## 📚 Further Reading
+## � Troubleshooting
+
+### Common Build Issues
+
+#### Android Build: "No Java compiler found"
+
+**Error**:
+
+```
+Error resolving plugin [id: 'com.facebook.react.settings']
+No Java compiler found, please ensure you are running Gradle with a JDK
+```
+
+**Solution**: Install and configure JDK 17 (see Prerequisites section above)
+
+#### Android Build: Package.json not found
+
+**Error**:
+
+```
+ConfigError: The expected package.json path: /path/to/android/package.json does not exist
+```
+
+**Solution**:
+
+1. Ensure your custom module has a `package.json` file
+2. Add your module to main `package.json` dependencies:
+
+```json
+{
+  "dependencies": {
+    "your-module-name": "file:./modules/your-module-name"
+  }
+}
+```
+
+#### iOS Build: CocoaPods issues
+
+**Error**: Pod installation failures
+
+**Solution**:
+
+```bash
+# Clean and reinstall pods
+cd ios && rm -rf Pods Podfile.lock
+cd .. && npx expo install --fix
+npx expo run:ios
+```
+
+#### Build Performance Issues
+
+**Solution**:
+
+```bash
+# Clear all caches
+npm run clean  # If you have this script
+rm -rf node_modules
+npm install
+
+# Clear Expo cache
+npx expo start -c
+
+# Clear React Native cache
+npx react-native start --reset-cache
+```
+
+### Git and Version Control
+
+#### Divergent branches error
+
+**Error**:
+
+```
+hint: You have divergent branches and need to specify how to reconcile them
+```
+
+**Solution**:
+
+```bash
+# Set merge strategy (recommended for most cases)
+git config pull.rebase false
+
+# Pull and merge
+git pull
+
+# Push your changes
+git push
+```
+
+## �📚 Further Reading
 
 - [Expo Modules API Documentation](https://docs.expo.dev/modules/module-api/)
 - [Third-Party Library Wrapping Guide](https://docs.expo.dev/modules/third-party-library/)
